@@ -72,8 +72,6 @@ export default function Home() {
               key={index}
               href={"/" + title}
               className="group relative rounded-lg border border-transparent px-7 py-4 transition-colors hover:border-cardBorder hover:bg-cardBg "
-              target="_blank"
-              rel="noopener noreferrer"
             >
               <Image
                 className="rounded-lg mb-4"
