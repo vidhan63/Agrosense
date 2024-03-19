@@ -148,7 +148,7 @@ export default function Home({ params }) {
       {/* <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex"> */}
       {/* <h1 className="text-4xl font-bold text-center">Predictor</h1> */}
       <p
-        className={` text-[32px] uppercase font-semibold mb-5 text-center lg:text-[48px]  ${poppins.className} text-heading relative z-10 font-semibold`}
+        className={` text-[24px] uppercase font-semibold mb-5 text-center lg:text-[48px]  ${poppins.className} text-heading relative z-10 font-semibold`}
       >
         {modelName}
       </p>
