@@ -4,6 +4,7 @@ const colors = {
   cardBorder: "#A2E7B5",
   heading: "#2A4F0F",
   text: "#82A179",
+  textLight: "#82A17940",
 };
 module.exports = {
   content: [
