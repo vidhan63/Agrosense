@@ -1,6 +1,9 @@
 from flask import Flask, request, jsonify
 import numpy as np
 import joblib
+import cv2
+from PIL import Image
+from keras.models import load_model
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -23,6 +26,37 @@ def fertiPredict(Temparature,Humidity,Moisture,Nitrogen,Potassium,Phosphorous,So
 def index():
     return "Hello, server started"
 
+def loadKerasModel(imgRes=None):
+  if imgRes is None:
+    return {"prediction": "No image provided"}
+  model = load_model('Braintumor.keras')
+  # Assuming imgRes is already a file object (like request.files['image'])
+  image_data = imgRes.read()
+  imgNm = imgRes.filename
+  image = cv2.imdecode(np.frombuffer(image_data, np.uint8), cv2.IMREAD_COLOR)
+  if image is None:
+    return {"error": "Image not found"}
+  img = Image.fromarray(image)
+  img = np.array(img,dtype=np.float16)
+  input_img = img[np.newaxis, ...]
+  result = np.argmax(model.predict(input_img), axis=-1)  # Get the scalar value
+  print(result)
+  if result[0] == 0:
+    prediction = 'no tumor'
+  else:
+    prediction = 'tumor found'
+  return {"prediction": prediction + " in " + imgNm}
+
+@app.route('/disease', methods=['GET', 'POST'])
+def brain1():
+  image_file = None
+  if request.method == 'POST':
+    print(
+        request.args.to_dict(),
+        request.files,
+    )
+    image_file = request.files['image']
+  return jsonify(loadKerasModel(image_file)
 
 @app.route("/health")
 def health():

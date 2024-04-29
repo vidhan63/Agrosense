@@ -2,6 +2,7 @@
 import { poppins } from "../layout";
 import { urlCommon } from "../constants";
 import { useEffect, useState } from "react";
+import ImageUploader from "@/components/ImageUploader";
 
 export default function Home({ params }) {
   const [prediction, setPrediction] = useState(null);
@@ -156,6 +157,9 @@ export default function Home({ params }) {
         setPrediction(data);
       })
       .catch((error) => console.error("Error:", error));
+  }
+  if (modelName == "Disease Detection") {
+    return <ImageUploader />;
   }
   return (
     <main className="flex min-h-screen  flex-col items-center  p-24">
