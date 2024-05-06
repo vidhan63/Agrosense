@@ -1,4 +1,4 @@
-// File: /Users/spark/Desktop/ai/argosense/frontend/app/layout.js
+// File: E:\New folder\argosense\frontend\app\layout.js
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

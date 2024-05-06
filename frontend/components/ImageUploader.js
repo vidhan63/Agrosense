@@ -38,10 +38,13 @@ const ImageUploader = ({ onUpload1 }) => {
     }
   };
   return (
-    <div>
+    <div className="w-screen flex flex-col justify-center items-center  h-screen">
+    <div className="flex flex-col max-w-80 gap-5">
       <input type="file" onChange={handleFileChange} />
-      <button onClick={handleUpload}>Upload</button>
+      <button className="mt-2 bg-white hover:bg-cardBg p-2 px-4 border rounded-lg border-cardBorder" onClick={handleUpload}>Get Result</button>
+
       {text && <p>{text}</p>}
+    </div>
     </div>
   );
 };

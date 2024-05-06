@@ -8,17 +8,17 @@ export default function Home({ params }) {
   const [prediction, setPrediction] = useState(null);
   const modelName = params.model?.toString().replace("%20", " ");
   console.log(modelName);
-  useEffect(() => {
-    let timer;
-    if (prediction) {
-      timer = setTimeout(() => {
-        setPrediction(null);
-      }, 5000);
-    }
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [prediction]);
+  // useEffect(() => {
+  //   let timer;
+  //   if (prediction) {
+  //     timer = setTimeout(() => {
+  //       setPrediction(null);
+  //     }, 5000);
+  //   }
+  //   return () => {
+  //     clearTimeout(timer);
+  //   };
+  // }, [prediction]);
   const commonProps = {
     className:
       "bg-cardBg rounded-lg py-1 px-3 focus:border-heading border border-textLight ",
@@ -108,13 +108,13 @@ export default function Home({ params }) {
       {
         value: "Soil_Type",
         label: "Soil Type",
-        defaultValue: "Loam",
+        defaultValue: "Loamy",
         type: "text",
       },
       {
         value: "Crop_Type",
         label: "Crop Type",
-        defaultValue: "Rice",
+        defaultValue: "Maize",
         type: "text",
       },
     ],
@@ -134,7 +134,7 @@ export default function Home({ params }) {
     const formData = {};
     fields[modelName].forEach((field) => {
       console.log(field.value, document.getElementById(field.value).value);
-      formData[field.value] = parseInt(
+      formData[field.value] = field.type == "text" ? document.getElementById(field.value).value :parseInt(
         document.getElementById(field.value).value,
       );
     });
@@ -198,8 +198,8 @@ export default function Home({ params }) {
       {/* </div> */}
       {prediction && (
         <div className="mx-2">
-          <h2>Prediction</h2>
-          <p>{JSON.stringify(prediction)}</p>
+          {/* <h2>Prediction</h2> */}
+          <p>{JSON.stringify(prediction['fertilizer'])}</p>
         </div>
       )}
     </main>
