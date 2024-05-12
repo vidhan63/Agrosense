@@ -2,6 +2,7 @@
 import { poppins } from "../layout";
 import { urlCommon } from "../constants";
 import { useEffect, useState } from "react";
+import { ArrowLeft } from "lucide-react";
 import ImageUploader from "@/components/ImageUploader";
 
 export default function Home({ params }) {
@@ -134,9 +135,10 @@ export default function Home({ params }) {
     const formData = {};
     fields[modelName].forEach((field) => {
       console.log(field.value, document.getElementById(field.value).value);
-      formData[field.value] = field.type == "text" ? document.getElementById(field.value).value :parseInt(
-        document.getElementById(field.value).value,
-      );
+      formData[field.value] =
+        field.type == "text"
+          ? document.getElementById(field.value).value
+          : parseInt(document.getElementById(field.value).value);
     });
     const endpoint = {
       "Crop Recommendation": "/predict",
@@ -157,6 +159,24 @@ export default function Home({ params }) {
         setPrediction(data);
       })
       .catch((error) => console.error("Error:", error));
+  }
+  if (prediction) {
+    return (
+      <main className="flex relative min-h-screen  flex-col items-center  p-24">
+        <button
+          className="absolute top-5 left-5 "
+          onClick={() => {
+            setPrediction(null);
+          }}
+        >
+          <ArrowLeft />
+        </button>
+        <div className="mx-2">
+          {/* <h2>Prediction</h2> */}
+          <p>{JSON.stringify(prediction["fertilizer"])}</p>
+        </div>
+      </main>
+    );
   }
   if (modelName == "Disease Detection") {
     return <ImageUploader />;
@@ -195,13 +215,6 @@ export default function Home({ params }) {
           Submit
         </button>
       </form>
-      {/* </div> */}
-      {prediction && (
-        <div className="mx-2">
-          {/* <h2>Prediction</h2> */}
-          <p>{JSON.stringify(prediction['fertilizer'])}</p>
-        </div>
-      )}
     </main>
   );
 }

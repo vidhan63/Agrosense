@@ -5,8 +5,15 @@ import React, { useState } from "react";
 const ImageUploader = ({ onUpload1 }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [text, setText] = useState("");
+  const [url, setUrl] = useState("");
+  const blah = new Image();
   const handleFileChange = (event) => {
-    setSelectedFile(event.target.files[0]);
+    const [file] = event.target.files;
+    if (file) {
+      const a = URL.createObjectURL(file);
+      setUrl(a);
+    }
+    setSelectedFile(file);
   };
 
   const onUpload = async (formData) => {
@@ -39,12 +46,19 @@ const ImageUploader = ({ onUpload1 }) => {
   };
   return (
     <div className="w-screen flex flex-col justify-center items-center  h-screen">
-    <div className="flex flex-col max-w-80 gap-5">
-      <input type="file" onChange={handleFileChange} />
-      <button className="mt-2 bg-white hover:bg-cardBg p-2 px-4 border rounded-lg border-cardBorder" onClick={handleUpload}>Get Result</button>
-
-      {text && <p>{text}</p>}
-    </div>
+      <div className="flex flex-col max-w-80 gap-5">
+        {url && (
+          <img src={url} alt="image" className="w-80 h-80 object-cover" />
+        )}
+        <input type="file" onChange={handleFileChange} />
+        <button
+          className="mt-2 bg-white hover:bg-cardBg p-2 px-4 border rounded-lg border-cardBorder"
+          onClick={handleUpload}
+        >
+          Get Result
+        </button>
+        {text && <p>{text}</p>}
+      </div>
     </div>
   );
 };

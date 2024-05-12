@@ -1,4 +1,4 @@
-// File: E:\New folder\argosense\frontend\app\[model]\page.js
+// File: /Users/spark/Desktop/nextApps/Agrosense/frontend/app/[model]/page.js
 import * as entry from '../../../../app/[model]/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
