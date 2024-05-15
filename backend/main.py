@@ -12,7 +12,6 @@ CORS(app)
 with open("model.joblib", "rb") as file:
     rfc = joblib.load(file)
 
-
 def recommendation(N, P, K, temperature, humidity, ph, rainfall):
     features = np.array([[N, P, K, temperature, humidity, ph, rainfall]])
     prediction = rfc.predict(features)
@@ -113,6 +112,7 @@ def recommendation(N, P, K, temperature, humidity, ph, rainfall):
             }
     return prediction[0]
 def fertiPredict(Temparature,Humidity,Moisture,Soil_Type,Crop_Type,Nitrogen,Potassium,Phosphorous):
+    recomend={:{'a':1,"b":2}}
     fetriModel = joblib.load("ferti.joblib")
     prediction = fetriModel.predict([[Temparature,Humidity,Moisture,Soil_Type,Crop_Type,Nitrogen,Potassium,Phosphorous]])
     return prediction
